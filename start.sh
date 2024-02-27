@@ -10,14 +10,17 @@ sudo apt install neofetch -y
 
 # install tmux
 sudo apt install tmux -y
-# install tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# install oh my tmux!
+cd ~
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
 
-# install docker 
+# install docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 bash get-docker.sh
 rm get-docker.sh
 
-#add user to docker group
+# add user to docker group
 sudo groupadd docker
 sudo usermod -sG docker $USER
