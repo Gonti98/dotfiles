@@ -4,4 +4,4 @@ This repo contains the configuration to setup my machines. This is using Chezmoi
 
 # How to run?
 
-`sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply Gonti98`
+`export PATH="$HOME/.local/bin:$PATH"; sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply Gonti98`
