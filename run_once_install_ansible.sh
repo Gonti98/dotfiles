@@ -9,6 +9,11 @@ install_on_ubuntu() {
     sudo apt-get install -y ansible
 }
 
+install_on_debian() {
+    sudo apt-get update
+    sudo apt-get install -y ansible
+}
+
 OS="$(uname -s)"
 case "${OS}" in
     Linux*)
@@ -16,6 +21,8 @@ case "${OS}" in
             install_on_fedora
         elif [ -f /etc/lsb-release ]; then
             install_on_ubuntu
+        elif [ -f /etc/debian_version ]; then
+            install_on_debian
         else
             echo "Unsupported Linux distribution"
             exit 1
@@ -26,7 +33,6 @@ case "${OS}" in
         exit 1
         ;;
 esac
-
 
 ansible-playbook ~/.bootstrap/setup.yml --ask-become-pass
 
