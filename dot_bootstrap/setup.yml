@@ -1,18 +1,25 @@
 ---
- - name: Machine stup
-   hosts: localhost
-   become: true
-   connection: local
-   gather_facts: true
+- name: Machine setup
+  hosts: localhost
+  become: true
+  connection: local
+  gather_facts: true
 
-   tasks:
+  vars:
+    packages:
+      - git
+      - curl
+      - btop
+      - neovim
+
+  tasks:
     - name: Get my user
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
 
-    - name: Install packages
+    - name: Install each package individually
       ansible.builtin.apt:
-        name:
-          - git 
-          - curl
-          - btop
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+      ignore_errors: yes
