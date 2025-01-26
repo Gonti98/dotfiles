@@ -4,5 +4,4 @@ This repo contains the configuration to setup my machines. This is using Chezmoi
 
 # How to run?
 
-`export GITHUB_USERNAME=Gonti98
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME`
+`sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Gonti98`
