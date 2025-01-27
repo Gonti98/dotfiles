@@ -11,6 +11,8 @@
       - curl
       - btop
       - neovim
+      - eza
+      - tree
 
   tasks:
     - name: Get my user
