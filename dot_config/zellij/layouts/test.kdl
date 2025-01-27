@@ -1,0 +1,11 @@
+layout {
+//  pane split_direction="Vertical" {
+//      pane size="10%" {
+//          plugin location="strider"
+//      }
+    pane
+//  }
+    pane size=1 borderless=true {
+        plugin location="status-bar"
+    }
+}
