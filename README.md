@@ -1,7 +1,9 @@
 # Dotfiles
 
-This repo contains the configuration to setup my machines. This is using Chezmoi, the dotfile manager to setup the install.
+This repository contains configuration files for my machines. It uses `Chezmoi` to manage dotfiles and `Ansible` for imperative package installation.
 
 # How to run?
 
-`export PATH="$HOME/.local/bin:$PATH" && sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply Gonti98`
+```
+export PATH="$HOME/.local/bin:$PATH" && sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply Gonti98
+```
