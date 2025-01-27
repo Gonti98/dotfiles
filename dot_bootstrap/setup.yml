@@ -13,6 +13,7 @@
       - neovim
       - eza
       - tree
+      - tldr
 
   tasks:
     - name: Get my user
@@ -25,3 +26,4 @@
         state: present
       loop: "{{ packages }}"
       ignore_errors: yes
+
