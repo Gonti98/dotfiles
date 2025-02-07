@@ -1,0 +1,43 @@
+---
+- name: Machine setup
+  hosts: localhost
+  become: true
+  connection: local
+  gather_facts: true
+
+  vars:
+    packages:
+      - git
+      - curl
+      - btop
+      - neovim
+      - eza
+      - tree
+      - tldr
+      - fastfetch
+      - ripgrep
+      - zoxide
+      - flatpak
+
+  tasks:
+    - name: Get my user
+      ansible.builtin.set_fact:
+        remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+    - name: Install system packages
+      ansible.builtin.dnf:
+        name: "{{ packages }}"
+        state: present
+      ignore_errors: yes
+
+    - name: Configure Flathub repository
+      command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    - name: Install Flatpak packages
+      ansible.builtin.flatpak:
+        name:
+          - md.obsidian.Obsidian
+          - com.discordapp.Discord
+          - net.hovancik.Stretchly
+          - com.spotify.Client
+        state: present
