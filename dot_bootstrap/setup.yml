@@ -41,3 +41,15 @@
           - net.hovancik.Stretchly
           - com.spotify.Client
         state: present
+
+    - name: Download kubectl binary
+      ansible.builtin.get_url:
+        url: "https://dl.k8s.io/release/{{ lookup('url', 'https://dl.k8s.io/release/stable.txt') }}/bin/linux/amd64/kubectl"
+        dest: "/tmp/kubectl"
+        mode: '0755'
+
+    - name: Install kubectl to /usr/local/bin
+      ansible.builtin.command:
+        cmd: install -o root -g root -m 0755 /tmp/kubectl /usr/local/bin/kubectl
+
+
