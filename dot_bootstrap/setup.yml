@@ -12,12 +12,13 @@
       - btop
       - neovim
       - eza
-      - tree
       - tldr
       - fastfetch
       - ripgrep
       - zoxide
       - flatpak
+      - helm
+      - podman
 
   tasks:
     - name: Get my user
@@ -40,6 +41,7 @@
           - com.discordapp.Discord
           - net.hovancik.Stretchly
           - com.spotify.Client
+          - com.brave.Browser
         state: present
 
     - name: Download kubectl binary
