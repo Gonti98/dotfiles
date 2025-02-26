@@ -18,9 +18,9 @@ save_to_clipboard = true
 style = { shape = "Underline", blinking = "On" }
 
 [font]
-normal = { family = "Fira Mono Nerd Font", style = "Regular" }
-bold = { family = "Fira Mono Nerd Font", style = "Bold" }
-italic = { family = "Fira Mono Nerd Font", style = "Italic" }
+normal = { family = "FiraCode Nerd Font", style = "Regular" }
+bold = { family = "FiraCode Nerd Font", style = "Bold" }
+italic = { family = "FiraCode Nerd Font", style = "Italic" }
 size = 16.0
 
 [general]

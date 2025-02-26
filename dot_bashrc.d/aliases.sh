@@ -18,7 +18,7 @@ alias gb='git branch'
 
 # System package management
 alias update='sudo dnf update -y'                          # Full system update
-alias install='sudo dnf install'                           # Install packages
+alias install='sudo dnf install -y'                        # Install packages
 alias remove='sudo dnf remove'                             # Remove packages
 alias clean='sudo dnf autoremove -y && sudo dnf clean all' # Clean up unused packages
 alias cl='clear'                                           # Clear the screen

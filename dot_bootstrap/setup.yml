@@ -5,53 +5,97 @@
   connection: local
   gather_facts: true
 
-  vars:
-    packages:
-      - git
-      - curl
-      - btop
-      - neovim
-      - eza
-      - tldr
-      - fastfetch
-      - ripgrep
-      - zoxide
-      - flatpak
-      - helm
-      - podman
-
   tasks:
     - name: Get my user
       ansible.builtin.set_fact:
         remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
 
     - name: Install system packages
-      ansible.builtin.dnf:
-        name: "{{ packages }}"
-        state: present
-      ignore_errors: yes
+      block:
+        - name: Define package list
+          set_fact:
+            packages:
+              - git
+              - curl
+              - btop
+              - neovim
+              - eza
+              - tldr
+              - fastfetch
+              - ripgrep
+              - zoxide
+              - flatpak
+              - easyeffects
+              - helm
+              - podman
+              - cmake #alacritty
+              - freetype-devel #alacritty
+              - fontconfig-devel #alacritty
+              - libxcb-devel #alacritty
+              - libxkbcommon-devel #alacritty
+              - g++ #alacritty
 
-    - name: Configure Flathub repository
-      command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        - name: Install packages
+          ansible.builtin.dnf:
+            name: "{{ packages }}"
+            state: present
+          ignore_errors: yes
 
-    - name: Install Flatpak packages
-      ansible.builtin.flatpak:
-        name:
-          - md.obsidian.Obsidian
-          - com.discordapp.Discord
-          - net.hovancik.Stretchly
-          - com.spotify.Client
-          - com.brave.Browser
-        state: present
+    - name: Configure Flathub repository and install packages
+      block:
+        - name: Configure Flathub repository
+          command: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+        - name: Install Flatpak packages
+          ansible.builtin.flatpak:
+            name:
+              - md.obsidian.Obsidian
+              - com.discordapp.Discord
+              - net.hovancik.Stretchly
+              - com.spotify.Client
+              - com.brave.Browser
+            state: present
 
     - name: Download kubectl binary
-      ansible.builtin.get_url:
-        url: "https://dl.k8s.io/release/{{ lookup('url', 'https://dl.k8s.io/release/stable.txt') }}/bin/linux/amd64/kubectl"
-        dest: "/tmp/kubectl"
-        mode: '0755'
+      block:
+        - name: Get the latest stable kubectl version
+          ansible.builtin.shell: |
+            curl -L -s https://dl.k8s.io/release/stable.txt
+          register: kubectl_version
+          changed_when: false
 
-    - name: Install kubectl to /usr/local/bin
-      ansible.builtin.command:
-        cmd: install -o root -g root -m 0755 /tmp/kubectl /usr/local/bin/kubectl
+        - name: Download kubectl binary
+          ansible.builtin.command:
+            cmd: curl -LO "https://dl.k8s.io/release/{{ kubectl_version.stdout }}/bin/linux/amd64/kubectl"
+            chdir: /tmp
+          args:
+            creates: /tmp/kubectl
 
+        - name: Install kubectl to /usr/local/bin
+          ansible.builtin.command:
+            cmd: install -o root -g root -m 0755 /tmp/kubectl /usr/local/bin/kubectl
+
+    - name: Download and install Nerd Fonts
+      block:
+        - name: Create fonts directory
+          ansible.builtin.file:
+            path: "/usr/local/share/fonts"
+            state: directory
+            mode: '0755'
+
+        - name: Download FiraCode archive
+          ansible.builtin.get_url:
+            url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FiraCode.zip"
+            dest: "/tmp/FiraCode.zip"
+            mode: '0644'
+
+        - name: Unzip FiraCode font files
+          ansible.builtin.unarchive:
+            src: "/tmp/FiraCode.zip"
+            dest: "/usr/local/share/fonts"
+            remote_src: yes
+            creates: "/usr/local/share/fonts/FiraCode"
+
+        - name: Clean unnecessary packages
+          ansible.builtin.shell: dnf remove -y firefox foot
 

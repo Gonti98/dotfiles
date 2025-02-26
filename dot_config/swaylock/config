@@ -1,9 +1,9 @@
 ignore-empty-password
 show-failed-attempts
-image=/home/gonti/Pictures/wp5060558-dark-aesthetic-1920x1080-wallpapers.jpg
+color=313244
 indicator-caps-lock
 scaling=fill
-font=FiraMonoNerdFont
+font=FiraCodeNerdFont
 font-size=38
 
 bs-hl-color=f5e0dc
