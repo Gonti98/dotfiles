@@ -53,7 +53,10 @@ set $term alacritty
 set $rofi_cmd rofi -terminal '$term'
 set $menu $rofi_cmd -show combi -combi-modes drun,run -modes combi
 
-### Idle management configuration
+# Startup applications
+exec --no-startup-id /bin/bash ~/.config/sway/sww_random.sh ~/Pictures/wallpaper/
+
+# Idle management configuration
 exec swayidle -w \
   timeout 300 'swaylock -f' \
   timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
