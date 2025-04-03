@@ -27,3 +27,6 @@ unset rc
 eval "$(zoxide init bash)"
 
 . "/home/gonti/.local/share/cargo/env"
+
+alias k=kubectl
+complete -o default -F __start_kubectl k

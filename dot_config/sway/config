@@ -28,12 +28,16 @@ client.focused_inactive      $color2  $color1  $color2  $color1  $color1
 client.urgent                $color2  $color2  $color1  $color2  $color1
 
 ### Monitor Configuration
-output eDP-1 mode 1920x1080@60Hz pos 0 1440
-output DP-3 mode 2560x1440@74.968Hz pos 0 0
+exec_always ~/.config/sway/monitor_setup.sh 
+# output eDP-1 mode 1920x1080@60Hz pos 0 1440
+# output DP-4 mode 2560x1440@74.968Hz pos 0 0
 
 ### Workspace Assignment
 workspace 1 output eDP-1
 workspace 2 output eDP-1
+workspace 3 output DP-3
+workspace 4 output DP-3
+
 
 ### Variables
 # Modifier key (Mod4 = Super/Windows key)

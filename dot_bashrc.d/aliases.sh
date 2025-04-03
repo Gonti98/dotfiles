@@ -23,11 +23,9 @@ alias remove='sudo dnf remove'                             # Remove packages
 alias clean='sudo dnf autoremove -y && sudo dnf clean all' # Clean up unused packages
 alias cl='clear'                                           # Clear the screen
 
-# Kubernetes
-alias k='kubectl'
-
 # NeoVim
 alias vi='nvim'
 
 # Chezmoi
 alias ch='chezmoi'
+
