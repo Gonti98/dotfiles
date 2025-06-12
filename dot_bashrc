@@ -24,9 +24,19 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-eval "$(zoxide init bash)"
+# History settings
+HISTSIZE=10000
+HISTFILESIZE=20000
+PROMPT_COMMAND='history -a; history -n'
+HISTCONTROL=ignoredups:ignorespace
+HISTTIMEFORMAT="%F %T "
+HISTFILE=~/.bash_history
 
-. "/home/gonti/.local/share/cargo/env"
+Enable Vi mode and configure prompt mode strings
+set -o vi
+bind 'set show-mode-in-prompt on'
+bind 'set vi-cmd-mode-string "\1\e[0;34m\2NORMAL → \1\e[0m\2"'
+bind 'set vi-ins-mode-string "\1\e[0;35m\2INSERT → \1\e[0m\2"'
 
-alias k=kubectl
-complete -o default -F __start_kubectl k
+export PS1="\n┌─── \u@\h \D{%H:%M} \$([[ \$? == 0 ]] && echo '✔' || echo '✘')\n└──  \w\n"
+

@@ -25,7 +25,7 @@
               - ripgrep
               - zoxide
               - flatpak
-              - easyeffects
+              - 
               - helm
               - podman
               - cmake #alacritty
@@ -98,4 +98,3 @@
 
         - name: Clean unnecessary packages
           ansible.builtin.shell: dnf remove -y firefox foot
-

@@ -1,5 +1,5 @@
 # File and directory listing
-alias ls='eza --all --long --header --icons --git'
+alias ls='eza --all --long --header --icons --git --sort type'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -28,4 +28,9 @@ alias vi='nvim'
 
 # Chezmoi
 alias ch='chezmoi'
+
+# VSCodium
+alias codium='flatpak run com.vscodium.codium "$@" && exit'
+
+alias k='kubectl'
 

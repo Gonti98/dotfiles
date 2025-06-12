@@ -14,8 +14,8 @@ default_floating_border none
 for_window [app_id="^.*"] border pixel 1
 
 ### Gaps Configuration
-gaps inner 6
-gaps outer 2
+gaps inner 4
+gaps outer 1
 
 ### Color settings for windows
 set $color1 #313244
