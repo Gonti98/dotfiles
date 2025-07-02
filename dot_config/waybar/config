@@ -8,7 +8,8 @@
     "modules-right": ["pulseaudio", "backlight", "battery", "clock", "tray", "custom/lock", "custom/power"],
     "wlr/workspaces": {
          "disable-scroll": true,
-         "format": " {icon} ",
+         "format": "{name}",
+         "format-active": "<b>{name}</b>",
          "format-icons": {
              "default": "",
          },
@@ -49,7 +50,7 @@
         "format-icons": ["󰂃", "󰁺",  "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
+        "sink": "@DEFAULT_SINK@",
         "format": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {

@@ -32,11 +32,8 @@ HISTCONTROL=ignoredups:ignorespace
 HISTTIMEFORMAT="%F %T "
 HISTFILE=~/.bash_history
 
-Enable Vi mode and configure prompt mode strings
+# Enable Vi mode and configure prompt mode strings
 set -o vi
-bind 'set show-mode-in-prompt on'
-bind 'set vi-cmd-mode-string "\1\e[0;34m\2NORMAL → \1\e[0m\2"'
-bind 'set vi-ins-mode-string "\1\e[0;35m\2INSERT → \1\e[0m\2"'
+# bind 'set show-mode-in-prompt on'
 
-export PS1="\n┌─── \u@\h \D{%H:%M} \$([[ \$? == 0 ]] && echo '✔' || echo '✘')\n└──  \w\n"
-
+eval "$(starship init bash)"

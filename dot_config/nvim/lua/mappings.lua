@@ -10,7 +10,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 -- Tab mapping
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close all other tabs" })
-map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close current tab" })
+map("n", "<leader>tq", "<cmd>tabclose<cr>", { desc = "Close current tab" })
 map("n", "<leader>tl", "<cmd>tabnext<cr>", { desc = "Next tab" })
 map("n", "<leader>th", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
 
