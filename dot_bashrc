@@ -29,11 +29,7 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 PROMPT_COMMAND='history -a; history -n'
 HISTCONTROL=ignoredups:ignorespace
-HISTTIMEFORMAT="%F %T "
 HISTFILE=~/.bash_history
 
-# Enable Vi mode and configure prompt mode strings
-set -o vi
-# bind 'set show-mode-in-prompt on'
-
+# starship init
 eval "$(starship init bash)"

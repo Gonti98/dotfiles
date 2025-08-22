@@ -1,23 +1,32 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    // "width": 1280, // Waybar width
-    // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "sway/workspaces"],
-    "modules-center": ["custom/music"],
-    "modules-right": ["pulseaudio", "backlight", "battery", "clock", "tray", "custom/lock", "custom/power"],
-    "wlr/workspaces": {
-         "disable-scroll": true,
-         "format": "{name}",
-         "format-active": "<b>{name}</b>",
-         "format-icons": {
-             "default": "",
-         },
-     },
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
+    "layer": "top",
+    "position": "top",
+    "separator-block-width": 15,
+    "modules-left": ["cpu", "temperature", "custom/music"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["pulseaudio", "backlight", "battery", "clock", "tray", "custom/power"],
+
+    "cpu": {
+      "interval": 10,
+      "format": "{}% ",
+      "max-length": 10,
+      "on-click": "btop"
     },
+     "temperature": {
+      // "thermal-zone": 2,
+      // "hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
+      // "critical-threshold": 80,
+      // "format-critical": "{temperatureC}°C ",
+      "format": "{temperatureC}°C "
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "current-only": false,
+        "all-outputs": true,
+        "format": "{name}",
+    },
+
     "custom/music": {
         "format": "  {}",
         "escape": true,
@@ -27,45 +36,59 @@
         "on-click": "playerctl play-pause",
         "max-length": 50
     },
+
     "clock": {
-        "timezone": "Euroope/Warsaw",
+        "timezone": "Europe/Warsaw",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "󰥔 {:%d/%m/%Y}",
-        "format": " {:%H:%M}"
+        "format": " {:%H:%M}",
+        "interval": 1
     },
+
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
+
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
+        "events": {
+            "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+            "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+            "on-charging-100": "notify-send -u normal 'Battery Full!'"
+        },
         "format": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
+        "format-charging": "⚡ {capacity}%",
         "format-plugged": "󰂄 {capacity}%",
         "format-alt": "{icon} {capacity}%",
-        "format-icons": ["󰂃", "󰁺",  "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
+
     "pulseaudio": {
         "sink": "@DEFAULT_SINK@",
         "format": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {
-            "default": ["", "", " "]
+            "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol"
     },
-    "custom/lock": {
-        "tooltip": false,
-        "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
-        "format": "",
+
+    "tray": {
+        "spacing": 10,
+        "icon-size": 18,
+        "show-passive-items": true
     },
+
     "custom/power": {
         "tooltip": false,
         "on-click": "poweroff",
         "format": "⏻"
     }
 }
+

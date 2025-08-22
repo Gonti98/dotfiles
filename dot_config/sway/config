@@ -11,10 +11,10 @@ titlebar_border_thickness 0
 ### Borders Configuration
 default_border none
 default_floating_border none
-for_window [app_id="^.*"] border pixel 1
+for_window [app_id="^.*"] border pixel 2
 
 ### Gaps Configuration
-gaps inner 4
+gaps inner 2
 gaps outer 1
 
 ### Color settings for windows
@@ -28,7 +28,7 @@ client.focused_inactive      $color2  $color1  $color2  $color1  $color1
 client.urgent                $color2  $color2  $color1  $color2  $color1
 
 ### Monitor Configuration
-exec_always ~/.config/sway/monitor_setup.sh 
+exec_always ~/.config/sway/monitor-setup.sh 
 # output eDP-1 mode 1920x1080@60Hz pos 0 1440
 # output DP-4 mode 2560x1440@74.968Hz pos 0 0
 
@@ -58,7 +58,7 @@ set $rofi_cmd rofi -terminal '$term'
 set $menu $rofi_cmd -show combi -combi-modes drun,run -modes combi
 
 # Startup applications
-exec --no-startup-id /bin/bash ~/.config/sway/sww_random.sh ~/Pictures/wallpaper/
+exec --no-startup-id /bin/bash ~/.config/sway/swww-random.sh ~/Pictures/wallpaper/ > /dev/null 2>&1 &
 
 # Idle management configuration
 exec swayidle -w \
@@ -70,6 +70,7 @@ exec swayidle -w \
 # Launch applications
 bindsym $mod+Return exec $term
 bindsym $mod+d exec $menu
+bindsym $mod+p exec ~/.config/sway/toggle-waybar.sh
 
 # Launch K9s application in terminal (move to scratchpad)
 bindsym $mod+g exec --no-startup-id swaymsg [app_id="k9s"] scratchpad show || exec $term --class=k9s --title=k9s -e k9s

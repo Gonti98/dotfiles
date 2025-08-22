@@ -46,13 +46,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Automatically set cwd to file's directory
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    local filepath = vim.api.nvim_buf_get_name(0)
-    local dir = vim.fn.fnamemodify(filepath, ":p:h")
-    if vim.fn.isdirectory(dir) == 1 then
-      vim.cmd("lcd " .. dir)
-    end
-  end,
-})
+-- -- Automatically set cwd to file's directory
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   callback = function()
+--     local filepath = vim.api.nvim_buf_get_name(0)
+--     local dir = vim.fn.fnamemodify(filepath, ":p:h")
+--     if vim.fn.isdirectory(dir) == 1 then
+--       vim.cmd("lcd " .. dir)
+--     end
+--   end,
+-- })
